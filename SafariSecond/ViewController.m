@@ -84,6 +84,26 @@
     self.webView.scrollView.delegate = self;
 }
 
+//apply google search to deal with error
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    UIAlertController *invalid = [UIAlertController alertControllerWithTitle : @"Warning" message : @"Website is invalid!" preferredStyle : UIAlertControllerStyleAlert];
+    UIAlertAction *search = [UIAlertAction actionWithTitle : @"Google Search" style : UIAlertActionStyleDefault handler : ^(UIAlertAction *action)
+    {
+        NSString *googleText = self.urlTextField.text;
+        NSString *googleString = [NSString stringWithFormat : @"http://www.google.com/search?q=%@" , googleText];
+        [self loadURL : googleString];
+    }
+    ];
+    [invalid addAction : search];
+    [self presentViewController : invalid animated : YES completion : ^
+     {
+         [self.networkActivityIndicator stopAnimating];
+     }
+     ];
+}
+
+
 //navigate back to previous page
 - (IBAction)onBackButtonPressed : (id)sender
 {
@@ -117,25 +137,26 @@
     [self presentViewController : comingSoon animated : YES completion : nil];
 }
 
-//alter textField while scrolling
+//move textField location while scrolling
 - (void)scrollViewDidScroll : (UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y <= 0)
-    {   self.urlTextField.alpha = 0.4;
+    {
+        self.urlTextField.alpha = 0.4;
         [UIView animateWithDuration : .8 animations : ^
          {
-            self.urlTextField.alpha = 1;
-            self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x , 60 , self.urlTextField.frame.size.width , self.urlTextField.frame.size.height);
+             self.urlTextField.alpha = 1;
+             self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x , 60 , self.urlTextField.frame.size.width , self.urlTextField.frame.size.height);
          }
         ];
     }
     else
     {
         self.urlTextField.alpha = 1;
-        [UIView animateWithDuration : .8 animations : ^
+        [UIView animateWithDuration : 1.2 animations : ^
          {
-            self.urlTextField.alpha = 0.4;
-            self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x , -30 , self.urlTextField.frame.size.width , self.urlTextField.frame.size.height);
+             self.urlTextField.alpha = 0.4;
+             self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x , -30 , self.urlTextField.frame.size.width , self.urlTextField.frame.size.height);
          }
         ];
     }
