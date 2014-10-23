@@ -8,20 +8,129 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITextFieldDelegate,UIWebViewDelegate,UIScrollViewDelegate,UIScrollViewDelegate>
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) IBOutlet UITextField *urlTextField;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *networkActivityIndicator;
+@property (strong, nonatomic) IBOutlet UIButton *forwardButton;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+-(void) loadURL: (NSString *)theURL
+{
+    NSURL *url = [NSURL URLWithString:theURL];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:urlRequest];
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.webView.scrollView.delegate = self;
+
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+
+    self.backButton.Enabled = NO;
+    self.forwardButton.Enabled = NO;
+    
+    [self loadURL:@"http://mobilemakers.co"];
+    [self updatebuttons];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.networkActivityIndicator stopAnimating];
+    [self updatebuttons];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    NSString *urlString = self.urlTextField.text;
+    if ([urlString hasPrefix: @"http://"]) {
+        [self loadURL:urlString];
+        
+    } else {
+        NSString *httpString = [NSString stringWithFormat:@"http://%@",urlString];
+        [self loadURL:httpString];
+        
+    }
+    
+    return YES;
+}
+- (IBAction)onBackButtonPressed:(id)sender {
+    
+    [self.webView goBack];
+
+}
+-(void)updatebuttons
+{
+    if (self.webView.canGoBack) {
+        self.backButton.enabled =YES;
+    }
+    else
+    {
+    self.backButton.Enabled = NO;
+    }
+
+    if (self.webView.canGoForward) {
+        self.forwardButton.Enabled = YES;
+    }
+    else
+    {
+        self.forwardButton.enabled = NO;
+    }
+    
+    self.urlTextField.text = self.webView.request.URL.absoluteString;
+    self.titleLabel.text = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+
+    
+}
+- (IBAction)onForwardButtonPressed:(id)sender {
+    [self.webView goForward];
+    
+   
+}
+- (IBAction)onStopLoadingButtonPressed:(id)sender
+{
+    [self.webView stopLoading];
+}
+- (IBAction)onReloadButtonPressed:(id)sender {
+    [self.webView reload];
+}
+- (IBAction)comingSoon:(id)sender
+{
+    UIAlertController *comingSoon = [UIAlertController alertControllerWithTitle:nil message:@"Coming Soon" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:comingSoon animated:YES completion:nil];
+    UIAlertAction *cancelSoon = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+    [comingSoon addAction:cancelSoon];
+}
+
+- (IBAction)deleteButton:(id)sender {
+    
+    self.urlTextField.text = @"";
+    
+    
+    
+}
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.urlTextField setHidden:YES];
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self.urlTextField setHidden:NO];
+}
+
+
 
 @end
