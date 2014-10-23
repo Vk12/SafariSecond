@@ -40,37 +40,37 @@
         self.forwardButton.enabled = NO;
     }
     //display current URL
-    self.urlTextField.text = [self.webView stringByEvaluatingJavaScriptFromString:@"window.location.href"];
+    self.urlTextField.text = [self.webView stringByEvaluatingJavaScriptFromString : @"window.location.href"];
     //display current page title
-    self.titleLabel.text = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.titleLabel.text = [self.webView stringByEvaluatingJavaScriptFromString : @"document.title"];
 }
 
 //hide spinner and manage button status when page finish loading
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webViewDidFinishLoad : (UIWebView *)webView
 {
     [self.networkActivityIndicator stopAnimating];
     [self updateButton];
 }
 
-- (void) loadURL: (NSString *)theURL
+- (void) loadURL : (NSString *)theURL
 {
-    NSURL *url = [NSURL URLWithString:theURL];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:urlRequest];
+    NSURL *url = [NSURL URLWithString : theURL];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL : url];
+    [self.webView loadRequest : urlRequest];
 }
 
 //prefix URL format
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn : (UITextField *)textField
 {
     NSString *urlString = self.urlTextField.text;
-    if ([urlString hasPrefix: @"http://"])
+    if ([urlString hasPrefix : @"http://"])
     {
-        [self loadURL:urlString];
+        [self loadURL : urlString];
     }
     else
     {
-        NSString *httpString = [NSString stringWithFormat:@"http://%@",urlString];
-        [self loadURL:httpString];
+        NSString *httpString = [NSString stringWithFormat : @"http://%@" , urlString];
+        [self loadURL : httpString];
     }
     return YES;
 }
@@ -80,61 +80,62 @@
     [super viewDidLoad];
     self.backButton.Enabled = NO;
     self.forwardButton.Enabled = NO;
-    [self loadURL:@"http://mobilemakers.co"];
+    [self loadURL : @"http://mobilemakers.co"];
     self.webView.scrollView.delegate = self;
 }
 
 //navigate back to previous page
-- (IBAction)onBackButtonPressed:(id)sender
+- (IBAction)onBackButtonPressed : (id)sender
 {
     [self.webView goBack];
 }
 
 //navigate forward to previous page
-- (IBAction)onForwardButtonPressed:(id)sender
+- (IBAction)onForwardButtonPressed : (id)sender
 {
     [self.webView goForward];
 }
 
 //stop page from loading
-- (IBAction)onStopLoadingButtonPressed:(id)sender
+- (IBAction)onStopLoadingButtonPressed : (id)sender
 {
     [self.webView stopLoading];
 }
 
 //reload page
-- (IBAction)onReloadButtonPressed:(id)sender
+- (IBAction)onReloadButtonPressed : (id)sender
 {
     [self.webView reload];
 }
 
 //button with alert action
-- (IBAction)comingSoon:(id)sender
+- (IBAction)comingSoon : (id)sender
 {
-    UIAlertController *comingSoon = [UIAlertController alertControllerWithTitle:@"" message:@"Coming Soon!" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelSoon = [UIAlertAction actionWithTitle:@"Return" style:UIAlertActionStyleDefault handler:nil];
-    [comingSoon addAction:cancelSoon];
-    [self presentViewController:comingSoon animated:YES completion:nil];
+    UIAlertController *comingSoon = [UIAlertController alertControllerWithTitle : @"" message : @"Coming Soon!" preferredStyle : UIAlertControllerStyleAlert];
+    UIAlertAction *cancelSoon = [UIAlertAction actionWithTitle : @"Return" style : UIAlertActionStyleDefault handler : nil];
+    [comingSoon addAction : cancelSoon];
+    [self presentViewController : comingSoon animated : YES completion : nil];
 }
 
 //alter textField while scrolling
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll : (UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y < 1)
-    {
-        [UIView animateWithDuration:.5 animations:^
+    if (scrollView.contentOffset.y <= 0)
+    {   self.urlTextField.alpha = 0.4;
+        [UIView animateWithDuration : .8 animations : ^
          {
             self.urlTextField.alpha = 1;
-            self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x, 60, self.urlTextField.frame.size.width, self.urlTextField.frame.size.height);
+            self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x , 60 , self.urlTextField.frame.size.width , self.urlTextField.frame.size.height);
          }
         ];
     }
     else
     {
-        [UIView animateWithDuration:.5 animations:^
+        self.urlTextField.alpha = 1;
+        [UIView animateWithDuration : .8 animations : ^
          {
-            self.urlTextField.alpha = 1;
-            self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x, -30, self.urlTextField.frame.size.width, self.urlTextField.frame.size.height);
+            self.urlTextField.alpha = 0.4;
+            self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x , -30 , self.urlTextField.frame.size.width , self.urlTextField.frame.size.height);
          }
         ];
     }
