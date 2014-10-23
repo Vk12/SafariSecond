@@ -32,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.webView.scrollView.delegate = self;
+    
 
 }
 
@@ -117,20 +118,28 @@
 - (IBAction)deleteButton:(id)sender {
     
     self.urlTextField.text = @"";
-    
-    
-    
-}
--(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    [self.urlTextField setHidden:YES];
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.urlTextField setHidden:NO];
-}
+    if (scrollView.contentOffset.y < 20) {
+        [UIView animateWithDuration:.5 animations:^{
+            self.urlTextField.alpha = 1;
+            self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x, 61, self.urlTextField.frame.size.width, self.urlTextField.frame.size.height);
+    
+    
+        }];}
+    else
+    {
+            [UIView animateWithDuration:.5 animations:^{
+                self.urlTextField.alpha = 1;
+                self.urlTextField.frame = CGRectMake(self.urlTextField.frame.origin.x, -40, self.urlTextField.frame.size.width, self.urlTextField.frame.size.height);
+                
+                
+            }];
+    }
 
+}
 
 
 @end
