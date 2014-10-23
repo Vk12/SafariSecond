@@ -18,14 +18,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIP-4o-PZh">
-                                <rect key="frame" x="0.0" y="55" width="320" height="473"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="513"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="jlT-ds-D6K"/>
                                 </connections>
                             </webView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search or enter website name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="86V-2c-YyX">
-                                <rect key="frame" x="16" y="60" width="268" height="30"/>
+                                <rect key="frame" x="16" y="60" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go"/>
                                 <connections>
@@ -33,7 +33,7 @@
                                 </connections>
                             </textField>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="DE6-Q8-Gir">
-                                <rect key="frame" x="288" y="64" width="20" height="20"/>
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="I11-os-RHv"/>
                                     <constraint firstAttribute="height" constant="20" id="Lg7-Ww-vcU"/>
@@ -42,7 +42,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y9B-FL-blL">
                                 <rect key="frame" x="0.0" y="528" width="320" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gv-KX-gP8">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gv-KX-gP8">
                                         <rect key="frame" x="5" y="5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="EaA-g8-JyC"/>
@@ -55,7 +55,7 @@
                                             <action selector="onBackButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CFy-gR-A9J"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlC-3I-c7Q">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlC-3I-c7Q">
                                         <rect key="frame" x="285" y="5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="aD3-6Z-S08"/>
@@ -132,15 +132,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="DE6-Q8-Gir" secondAttribute="centerY" id="Enm-qR-02c"/>
                             <constraint firstAttribute="trailing" secondItem="y9B-FL-blL" secondAttribute="trailing" id="Ge8-ie-iQV"/>
                             <constraint firstItem="3RE-rV-sNw" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="HGA-hN-2Ub"/>
                             <constraint firstItem="86V-2c-YyX" firstAttribute="top" secondItem="3RE-rV-sNw" secondAttribute="bottom" constant="4" id="ILL-gG-qRm"/>
-                            <constraint firstItem="DE6-Q8-Gir" firstAttribute="leading" secondItem="86V-2c-YyX" secondAttribute="trailing" constant="4" id="LQg-pT-9NB"/>
-                            <constraint firstItem="CIP-4o-PZh" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottomMargin" constant="-40" id="UHt-0J-Qag"/>
+                            <constraint firstItem="CIP-4o-PZh" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottomMargin" id="UHt-0J-Qag"/>
+                            <constraint firstAttribute="centerX" secondItem="DE6-Q8-Gir" secondAttribute="centerX" id="XwE-xX-NOU"/>
                             <constraint firstItem="3RE-rV-sNw" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="10" id="YCw-sp-hWY"/>
-                            <constraint firstItem="DE6-Q8-Gir" firstAttribute="top" secondItem="3RE-rV-sNw" secondAttribute="bottom" constant="8" id="YXz-xW-p4j"/>
                             <constraint firstItem="86V-2c-YyX" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="40" id="Zac-c7-aQh"/>
-                            <constraint firstItem="86V-2c-YyX" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" constant="-20" id="e9v-FE-u5B"/>
+                            <constraint firstItem="86V-2c-YyX" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="e9v-FE-u5B"/>
                             <constraint firstAttribute="bottom" secondItem="y9B-FL-blL" secondAttribute="bottom" id="fem-Y9-Foh"/>
                             <constraint firstItem="3RE-rV-sNw" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="frJ-Jp-2Pb"/>
                             <constraint firstItem="86V-2c-YyX" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="gBW-kh-wrB"/>
@@ -154,6 +154,7 @@
                     <navigationItem key="navigationItem" id="VeB-Eg-wnC"/>
                     <connections>
                         <outlet property="backButton" destination="6gv-KX-gP8" id="8a0-9V-4jR"/>
+                        <outlet property="buttonView" destination="y9B-FL-blL" id="CG6-4b-dXy"/>
                         <outlet property="forwardButton" destination="SlC-3I-c7Q" id="VhZ-ZH-DGY"/>
                         <outlet property="networkActivityIndicator" destination="DE6-Q8-Gir" id="Zir-Km-RfT"/>
                         <outlet property="titleLabel" destination="3RE-rV-sNw" id="UIz-4g-6Df"/>
