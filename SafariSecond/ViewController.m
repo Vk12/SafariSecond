@@ -71,8 +71,12 @@
 //apply google search to deal with error
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    UIAlertController *invalid = [UIAlertController alertControllerWithTitle : @"Warning" message : @"Website is invalid!" preferredStyle : UIAlertControllerStyleAlert];
-    UIAlertAction *search = [UIAlertAction actionWithTitle : @"Google Search" style : UIAlertActionStyleDefault handler : ^(UIAlertAction *action)
+    UIAlertController *invalid = [UIAlertController alertControllerWithTitle : @"Warning"
+                                                                     message : @"Website is invalid!"
+                                                              preferredStyle : UIAlertControllerStyleAlert];
+    UIAlertAction *search = [UIAlertAction actionWithTitle : @"Google Search"
+                                                     style : UIAlertActionStyleDefault
+                                                   handler : ^(UIAlertAction *action)
     {
         NSString *googleText = self.urlTextField.text;
         NSString *googleString = [NSString stringWithFormat : @"http://www.google.com/search?q=%@" , googleText];
@@ -80,7 +84,8 @@
     }
     ];
     [invalid addAction : search];
-    [self presentViewController : invalid animated : YES completion : ^
+    [self presentViewController : invalid
+                       animated : YES completion : ^
      {
          [self.networkActivityIndicator stopAnimating];
      }
@@ -114,8 +119,12 @@
 //button with alert action
 - (IBAction)comingSoon : (id)sender
 {
-    UIAlertController *comingSoon = [UIAlertController alertControllerWithTitle : @"" message : @"Coming Soon!" preferredStyle : UIAlertControllerStyleAlert];
-    UIAlertAction *cancelSoon = [UIAlertAction actionWithTitle : @"Return" style : UIAlertActionStyleDefault handler : nil];
+    UIAlertController *comingSoon = [UIAlertController alertControllerWithTitle : @""
+                                                                        message : @"Coming Soon!"
+                                                                 preferredStyle : UIAlertControllerStyleAlert];
+    UIAlertAction *cancelSoon = [UIAlertAction actionWithTitle : @"Return"
+                                                         style : UIAlertActionStyleDefault
+                                                       handler : nil];
     [comingSoon addAction : cancelSoon];
     [self presentViewController : comingSoon animated : YES completion : nil];
 }
@@ -131,8 +140,14 @@
          {
              self.urlTextField.alpha = 1;
              self.buttonView.alpha = 1;
-             self.urlTextField.frame = CGRectMake(self.webView.frame.origin.x+16 , self.webView.frame.origin.y+5 , self.webView.frame.size.width-32 , self.urlTextField.frame.size.height);
-             self.buttonView.frame =CGRectMake(self.webView.frame.origin.x , self.webView.frame.size.height+15 , self.webView.frame.size.width , self.buttonView.frame.size.height);
+             self.urlTextField.frame = CGRectMake(self.webView.frame.origin.x+16 ,
+                                                  self.webView.frame.origin.y+5 ,
+                                                  self.webView.frame.size.width-32 ,
+                                                  self.urlTextField.frame.size.height);
+             self.buttonView.frame =CGRectMake(self.webView.frame.origin.x ,
+                                               self.webView.frame.size.height+15 ,
+                                               self.webView.frame.size.width ,
+                                               self.buttonView.frame.size.height);
          }
         ];
     }
@@ -144,8 +159,14 @@
          {
              self.urlTextField.alpha = 0.4;
              self.buttonView.alpha = 0.4;
-             self.urlTextField.frame = CGRectMake(self.webView.frame.origin.x+16 , self.webView.frame.origin.y-90 , self.webView.frame.size.width-32 , self.urlTextField.frame.size.height);
-             self.buttonView.frame =CGRectMake(self.webView.frame.origin.x , self.webView.frame.size.height+55 , self.webView.frame.size.width , self.buttonView.frame.size.height);
+             self.urlTextField.frame = CGRectMake(self.webView.frame.origin.x+16 ,
+                                                  self.webView.frame.origin.y-90 ,
+                                                  self.webView.frame.size.width-32 ,
+                                                  self.urlTextField.frame.size.height);
+             self.buttonView.frame =CGRectMake(self.webView.frame.origin.x ,
+                                               self.webView.frame.size.height+55 ,
+                                               self.webView.frame.size.width ,
+                                               self.buttonView.frame.size.height);
          }
         ];
     }
